@@ -1,12 +1,9 @@
 import Wrapper from "@/components/shared/Wrapper";
-
+import { client } from "../../../sanity/lib/client";
 import Image from "next/image";
-
+import { urlForImage } from "../../../sanity/lib/image";
 import Link from "next/link";
 import { SanityProducts } from "@/interfaces";
-import { client } from "../../sanity/lib/client";
-import { urlForImage } from "../../sanity/lib/image";
-import { Hero, Newsletter, Products, Promotion, Unique, } from "@/components/sections";
 
 const getAllProducts = async () => {
   const query = `*[_type == "product"] | order(_createdAt asc) {
@@ -27,11 +24,6 @@ const AllProducts = async () => {
   const productsData: SanityProducts[] = await getAllProducts();
   return (
     <Wrapper>
-      <Hero/>
-      <Promotion/>
-      <Products/>
-      <Unique/>
-      <Newsletter/>
       <div className="grid grid-cols-1 bs:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20 place-items-center px-10">
         {productsData.map((product) => (
           <div
